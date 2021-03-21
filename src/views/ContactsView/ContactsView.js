@@ -13,6 +13,7 @@ import {
   getAllContacts,
   getLoading,
 } from '../../redux/phoneBook/phoneBook-selectors';
+import { authSelectors } from '../../redux/auth';
 
 class ContactsView extends Component {
   componentDidMount() {
@@ -21,24 +22,27 @@ class ContactsView extends Component {
 
   render() {
     return (
-      <Container maxWidth="md">
-        <Title title="Phonebook:" />
+      <>
+        {this.props.isLoading ||
+          (this.props.isAuthLoading && (
+            <Modal>
+              <Preloader />
+            </Modal>
+          ))}
+        <Container maxWidth="md">
+          <Title title="Phonebook:" />
 
-        <ContactForm />
-        {this.props.isLoading && (
-          <Modal>
-            <Preloader />
-          </Modal>
-        )}
+          <ContactForm />
 
-        {this.props.contacts.length > 0 && (
-          <h2 className={styles.title}>Contacts:</h2>
-        )}
+          {this.props.contacts.length > 0 && (
+            <h2 className={styles.title}>Contacts:</h2>
+          )}
 
-        <Filter />
+          <Filter />
 
-        <ContactList />
-      </Container>
+          <ContactList />
+        </Container>
+      </>
     );
   }
 }
@@ -46,6 +50,7 @@ class ContactsView extends Component {
 const mapStateToProps = state => ({
   contacts: getAllContacts(state),
   isLoading: getLoading(state),
+  isAuthLoading: authSelectors.getIsAuthLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({

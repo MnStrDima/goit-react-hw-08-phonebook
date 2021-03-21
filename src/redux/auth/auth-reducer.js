@@ -23,7 +23,7 @@ const token = createReducer(initialUserState.token, {
   [authActions.logoutSuccess]: () => null,
 });
 
-const isLoading = createReducer(initialUserState.isAuthLoading, {
+const isAuthLoading = createReducer(initialUserState.isAuthLoading, {
   [authActions.registerRequest]: () => true,
   [authActions.registerSuccess]: () => false,
   [authActions.registerError]: () => false,
@@ -32,6 +32,7 @@ const isLoading = createReducer(initialUserState.isAuthLoading, {
   [authActions.loginError]: () => false,
   [authActions.logoutRequest]: () => true,
   [authActions.logoutSuccess]: () => false,
+  [authActions.logoutError]: () => false,
   [authActions.getCurrentUserRequest]: () => true,
   [authActions.getCurrentUserSuccess]: () => false,
   [authActions.getCurrentUserError]: () => false,
@@ -61,5 +62,5 @@ export default combineReducers({
   token,
   isLoggedIn,
   error,
-  isLoading,
+  isAuthLoading,
 });

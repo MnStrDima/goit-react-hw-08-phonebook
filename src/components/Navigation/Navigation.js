@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import routes from '../../routes';
+import routesData from '../../routes';
 import { authSelectors } from '../../redux/auth';
 
 import styles from './Navigation.module.css';
@@ -11,7 +11,7 @@ const Navigation = ({ isAuthenticated }) => {
       <nav className={styles.siteNav}>
         <NavLink
           exact
-          to={routes.homePage}
+          to={routesData.pathes.homePage}
           className={styles.navLink}
           activeClassName={styles.activeNavLink}
         >
@@ -20,7 +20,7 @@ const Navigation = ({ isAuthenticated }) => {
         {isAuthenticated && (
           <NavLink
             exact
-            to={routes.contacts}
+            to={routesData.pathes.contacts}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
           >

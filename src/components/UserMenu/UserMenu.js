@@ -3,9 +3,9 @@ import { Button } from '@material-ui/core';
 import { authSelectors, authOperations } from '../../redux/auth';
 import styles from './UserMenu.module.css';
 
-const UserMenu = ({ email, onLogout }) => (
+const UserMenu = ({ email, name, onLogout }) => (
   <div className={styles.container}>
-    <span className={styles.email}>Welcome, {email}</span>
+    <span className={styles.email}>Welcome, {name ? name : email}</span>
 
     <Button
       type="submit"
@@ -20,6 +20,7 @@ const UserMenu = ({ email, onLogout }) => (
 );
 const mapStateToProps = state => ({
   email: authSelectors.getEmail(state),
+  name: authSelectors.getUserName(state),
 });
 
 const mapDispatchToProps = {
